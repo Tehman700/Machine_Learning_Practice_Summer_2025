@@ -24,7 +24,7 @@ df['species'] = species
 print(df.head())
 
 
-ee = []
+ee = [56,56]
 
 for i in range(0,150):
     first = df.iloc[i]['sepal length (cm)']
