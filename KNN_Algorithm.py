@@ -39,3 +39,5 @@ for i in range(0,150):
 
 # I'm applying k =1
 print(df.iloc[ee.index(min(ee))])
+
+
