@@ -51,10 +51,7 @@ for i in neighbors_settings:
     scoring_accuracy.append(knn.score(X_test, Y_test))
     y.append(knn.score(X_train, Y_train))
 
-    knn_regression = KNeighborsRegressor(n_neighbors=i)
-    knn_regression.fit(X_train, Y_train)
-    regression_test_accuracy.append(knn_regression.score(X_test, Y_test))
-    regression_train_accuracy.append(knn_regression.score(X_train, Y_train))
+
 
 
 print(scoring_accuracy)
@@ -63,9 +60,29 @@ print(y)
 print(regression_test_accuracy)
 print(regression_train_accuracy)
 
-plt.plot(neighbors_settings, regression_test_accuracy, label = "Testing Values")
-plt.plot(neighbors_settings, regression_train_accuracy, label = "Training Values")
-plt.ylabel("Accuracy")
-plt.xlabel("Number of Neighbors")
-plt.legend()
-plt.show()
+
+
+# Can change this below according to the plot which we want
+# plt.plot(neighbors_settings, regression_test_accuracy, label = "Testing Values")
+# plt.plot(neighbors_settings, regression_train_accuracy, label = "Training Values")
+# plt.ylabel("Accuracy")
+# plt.xlabel("Number of Neighbors")
+# plt.legend()
+# plt.show()
+
+
+
+
+
+
+
+for i in range(1,20):
+    knn_regression = KNeighborsRegressor(n_neighbors=i)
+    knn_regression.fit(X_train, Y_train)
+
+
+    #print("Test set predictions in RegressionModel:\n{}".format(knn_regression.predict(X_test)))
+    # Since it's a regression model we should be using R^2 Score Strategy
+
+
+    print("TEST SET R^2: {:.2f}".format(knn_regression.score(X_test, Y_test)))
