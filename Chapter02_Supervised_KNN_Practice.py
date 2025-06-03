@@ -35,7 +35,7 @@ print(benign," " ,malignant)
 X_train, X_test,  Y_train, Y_test = train_test_split(cancer.data, cancer.target, random_state=0)
 
 
-
+# What if we changed the neighbors each time and view our results
 neighbors_settings = range(1, 11)
 
 scoring_accuracy = []
