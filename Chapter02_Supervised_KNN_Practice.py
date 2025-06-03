@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from sklearn.datasets import load_breast_cancer
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -33,10 +34,26 @@ print(benign," " ,malignant)
 
 X_train, X_test,  Y_train, Y_test = train_test_split(cancer.data, cancer.target, random_state=0)
 
-knn = KNeighborsClassifier(n_neighbors=1)
-knn.fit(X_train, Y_train)
 
-print(knn.predict(X_test))
 
-print(knn.score(X_test, Y_test))
+neighbors_settings = range(1, 11)
 
+scoring_accuracy = []
+y = []
+for i in neighbors_settings:
+    knn = KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train, Y_train)
+
+    scoring_accuracy.append(knn.score(X_test, Y_test))
+    y.append(knn.score(X_train, Y_train))
+
+
+print(scoring_accuracy)
+print(y)
+
+plt.plot(neighbors_settings, scoring_accuracy, label = "Testing Values")
+plt.plot(neighbors_settings, y, label = "Training Values")
+plt.ylabel("Accuracy")
+plt.xlabel("Number of Neighbors")
+plt.legend()
+plt.show()
