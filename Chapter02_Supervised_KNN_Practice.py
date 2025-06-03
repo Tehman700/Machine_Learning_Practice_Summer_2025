@@ -3,6 +3,7 @@ from sklearn.datasets import load_breast_cancer
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsRegressor
 
 cancer = load_breast_cancer()
 
@@ -40,6 +41,9 @@ neighbors_settings = range(1, 11)
 
 scoring_accuracy = []
 y = []
+
+regression_test_accuracy = []
+regression_train_accuracy = []
 for i in neighbors_settings:
     knn = KNeighborsClassifier(n_neighbors=i)
     knn.fit(X_train, Y_train)
@@ -47,12 +51,20 @@ for i in neighbors_settings:
     scoring_accuracy.append(knn.score(X_test, Y_test))
     y.append(knn.score(X_train, Y_train))
 
+    knn_regression = KNeighborsRegressor(n_neighbors=i)
+    knn_regression.fit(X_train, Y_train)
+    regression_test_accuracy.append(knn_regression.score(X_test, Y_test))
+    regression_train_accuracy.append(knn_regression.score(X_train, Y_train))
+
 
 print(scoring_accuracy)
 print(y)
 
-plt.plot(neighbors_settings, scoring_accuracy, label = "Testing Values")
-plt.plot(neighbors_settings, y, label = "Training Values")
+print(regression_test_accuracy)
+print(regression_train_accuracy)
+
+plt.plot(neighbors_settings, regression_test_accuracy, label = "Testing Values")
+plt.plot(neighbors_settings, regression_train_accuracy, label = "Training Values")
 plt.ylabel("Accuracy")
 plt.xlabel("Number of Neighbors")
 plt.legend()
