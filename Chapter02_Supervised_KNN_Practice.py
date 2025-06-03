@@ -3,9 +3,6 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
-from Chapter02_Supervised_learning import malignant
-from KNN_in_SKlearn import X_train
-
 cancer = load_breast_cancer()
 
 df  = pd.DataFrame(cancer.data, columns= cancer.feature_names)
@@ -38,4 +35,8 @@ X_train, X_test,  Y_train, Y_test = train_test_split(cancer.data, cancer.target,
 
 knn = KNeighborsClassifier(n_neighbors=1)
 knn.fit(X_train, Y_train)
+
+print(knn.predict(X_test))
+
+print(knn.score(X_test, Y_test))
 
