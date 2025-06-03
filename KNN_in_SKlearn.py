@@ -16,7 +16,7 @@ print(X.shape)
 
 knn = KNeighborsClassifier(n_neighbors=2)
 
-knn.fit(X, y)
+knn.fit(X_train, y_train)
 
 new_set = np.array([[1.2,1.8,2.4,1.0]])
 print(new_set.shape)
