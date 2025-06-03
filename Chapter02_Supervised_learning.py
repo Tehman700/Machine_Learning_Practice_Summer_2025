@@ -54,45 +54,6 @@ print("Test set predictions: {}".format(knn.predict(X_test)))
 
 print("Test set accuracy: {:.2f}".format(knn.score(X_test, y_test)))
 
-
-sample = [
-    14.5,   # mean radius
-    20.3,   # mean texture
-    95.0,   # mean perimeter
-    660.0,  # mean area
-    0.100,  # mean smoothness
-    0.120,  # mean compactness
-    0.080,  # mean concavity
-    0.050,  # mean concave points
-    0.180,  # mean symmetry
-    0.060,  # mean fractal dimension
-    0.40,   # radius error
-    1.10,   # texture error
-    2.50,   # perimeter error
-    30.0,   # area error
-    0.007,  # smoothness error
-    0.025,  # compactness error
-    0.031,  # concavity error
-    0.011,  # concave points error
-    0.020,  # symmetry error
-    0.003,  # fractal dimension error
-    16.5,   # worst radius
-    28.0,   # worst texture
-    110.0,  # worst perimeter
-    850.0,  # worst area
-    0.140,  # worst smoothness
-    0.25,   # worst compactness
-    0.20,   # worst concavity
-    0.10,   # worst concave points
-    0.30,   # worst symmetry
-    0.080   # worst fractal dimension
-]
-
-
-predictions = knn.predict([sample])
-print(predictions)
-
-
 # Select 50 random test samples
 np.random.seed(0)
 indices = np.random.choice(len(X_test), size=50, replace=False)
@@ -105,3 +66,26 @@ y_pred = knn.predict(X_sample)
 # Accuracy
 accuracy = accuracy_score(y_sample, y_pred)
 print(f"Accuracy on 50 real test samples: {accuracy:.2f}")
+
+
+
+# for Decision Boundaries
+# NOTE: Decision boundary visualization only works on 2D data.
+# So we reduce to 2 features for visualization purposes.
+
+X_vis = cancer.data[:, :2]  # Use first two features
+y_vis = cancer.target
+
+fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+
+for n_neighbors, ax in zip([1, 3, 9], axes):
+    clf = KNeighborsClassifier(n_neighbors=n_neighbors).fit(X_vis, y_vis)
+    mglearn.plots.plot_2d_separator(clf, X_vis, fill=True, eps=0.5, ax=ax, alpha=0.4)
+    mglearn.discrete_scatter(X_vis[:, 0], X_vis[:, 1], y_vis, ax=ax)
+    ax.set_title(f"{n_neighbors} neighbor(s)")
+    ax.set_xlabel("Feature 0 (mean radius)")
+    ax.set_ylabel("Feature 1 (mean texture)")
+
+axes[0].legend(loc=3)
+plt.tight_layout()
+plt.show()
