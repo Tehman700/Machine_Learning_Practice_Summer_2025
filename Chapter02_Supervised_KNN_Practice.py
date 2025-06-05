@@ -85,4 +85,5 @@ for i in range(1,20):
     # Since it's a regression model we should be using R^2 Score Strategy
 
 
-    print("TEST SET R^2: {:.2f}".format(knn_regression.score(X_test, Y_test)))
+    print("TEST SET R^2: {:.2f} ".format(knn_regression.score(X_test, Y_test)), " ",i)
+    # print("Train Set accuracy: {:.2f} ".format(knn_regression.score(X_train, Y_train)), " ",i)
