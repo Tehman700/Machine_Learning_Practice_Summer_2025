@@ -24,7 +24,12 @@ y_pred = model.predict(X_test)
 print("R² score:", r2_score(y_test, y_pred))
 print("MAE:", mean_absolute_error(y_test, y_pred))
 print("MSE:", mean_squared_error(y_test, y_pred))
+print("lr.coef_: {}".format(model.coef_))
+print("lr.intercept_: {}".format(model.intercept_))
 
+
+print("Training set score: {:.2f}".format(model.score(X_train, y_train)))
+print("Test set score: {:.2f}".format(model.score(X_test, y_test)))
 
 import matplotlib.pyplot as plt
 
@@ -34,3 +39,6 @@ plt.ylabel("Predicted Weight")
 plt.title("Actual vs Predicted Fish Weights")
 plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--')  # reference line
 plt.show()
+
+
+
