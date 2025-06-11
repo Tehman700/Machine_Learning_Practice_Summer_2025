@@ -29,6 +29,7 @@ df_model = df[columns_needed]
 
 # Convert to numeric if necessary
 numeric_columns = ['vote_average', 'runtime', 'budget', 'popularity', 'release_year']
+
 for col in numeric_columns:
     df_model[col] = pd.to_numeric(df_model[col], errors='coerce')
 
@@ -57,12 +58,19 @@ X_scaled = scaler.fit_transform(X)
 
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
 
-
+f = []
 for i in range(1,100):
-    knn = KNeighborsClassifier(n_neighbors=i)
+    knn = KNeighborsClassifier(n_neighbors=i, weights='distance')
 
     knn.fit(X_train, y_train)
-    print(f"k={i} → Accuracy: {knn.score(X_test, y_test):.4f}")
+
+    f.append(knn.score(X_test, y_test))
+    print(knn.score(X_test, y_test))
+
+fi = sum(f) / len(f)
+print("This is the Average of the Accuracy ", fi)
+
+
 
 
 
