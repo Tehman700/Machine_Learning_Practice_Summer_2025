@@ -37,7 +37,35 @@ df_model = df_model.dropna()
 
 # Show final cleaned dataset
 print(df_model.head())
-print(df_model.describe())
+#print(df_model.describe())
+
+
+
+
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+
+X= df_model[numeric_columns]
+Y = df_model['primary_genre']
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, Y, test_size=0.2, random_state=42)
+
+
+for i in range(1,100):
+    knn = KNeighborsClassifier(n_neighbors=i)
+
+    knn.fit(X_train, y_train)
+    print(f"k={i} → Accuracy: {knn.score(X_test, y_test):.4f}")
+
+
+
 
 
 
