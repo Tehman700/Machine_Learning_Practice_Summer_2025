@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/Air University CEP.iml" filepath="$PROJECT_DIR$/.idea/Air University CEP.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/Machine Learning Pycharm.iml" filepath="$PROJECT_DIR$/.idea/Machine Learning Pycharm.iml" />
+>>>>>>> b0b0c7280df22599c67013442465d723fa8a99e2
     </modules>
   </component>
 </project>
